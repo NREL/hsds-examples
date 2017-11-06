@@ -4,6 +4,8 @@ This repository provides examples and convenience functions for working with the
 
 The WIND Toolkit SDS operates using the HSDS software developed by the [HDF Group](https://www.hdfgroup.org/) and is hosted on Amazon Web Services (AWS) using a combination of EC2 (Elastic Compute) and S3 (Scalable Storage Service). You can read more about the HSDS service [in this slide deck](https://www.slideshare.net/HDFEOS/hdf-cloud-services).
 
+### How to Use
+
 To get started, [download Anaconda](https://anaconda.org/anaconda/python) or another distribution of Python, install the h5pyd library:
 
 ```
@@ -27,3 +29,12 @@ Finally, you can use Jupyter Notebook to view the example notebooks:
 cd notebooks
 jupyter notebook
 ```
+
+### Credit
+
+This software was developed by Caleb Phillips (caleb.phillips@nrel.gov), John Readey (jreadey@hdfgroup.org), and Jordan Perr-Sauer (Jordan.Perr-Sauer@nrel.gov) to support the NREL Research Data Initiative and WIND Toolkit at the National Rewnable Energy Laboratory in Golden, Colorado, USA.
+
+### License
+
+Copyright (c) 2017, National Renewable Energy Laboratory (NREL)
+All rights reserved. See LICENSE for additional information.
