@@ -95,3 +95,12 @@ There are two special datasets for indexing and time slicing:
 
   * coordinates - lat/lon coordinates for every point on the x/y grid (original projection is a modified Lambert Conic)
   * datetime - YYYYMMDDHHMMSS datetimestamp for every time in the time dimension
+
+### Credit
+
+This software was developed by Caleb Phillips (caleb.phillips@nrel.gov), John Readey (jreadey@hdfgroup.org), and Jordan Perr-Sauer (Jordan.Perr-Sauer@nrel.gov) to support the NREL Research Data Initiative and WIND Toolkit at the National Rewnable Energy Laboratory in Golden, Colorado, USA.
+
+### License
+
+Copyright (c) 2017, National Renewable Energy Laboratory (NREL)
+All rights reserved. See LICENSE for additional information.
