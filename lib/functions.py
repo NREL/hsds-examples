@@ -22,20 +22,6 @@ def indicesForCoord(f, lat_index, lon_index):
     ij = [int(round(x/2000)) for x in delta]
     return tuple(reversed(ij))
 
-# This function fetches the 7-year timeseries in chunks of 8,000 elements
-def entireTimeseries(dset, lat_index, lon_index):
-    extent = dset.shape[0]
-    tseries = np.zeros((extent,), dtype=dset.dtype)
-    items_per_req = 8000 # extract time series in batches of 8000 elements
-    count = (extent // items_per_req) + 1
-    for i in range(count):
-        start = i*items_per_req
-        stop = start + items_per_req
-        if stop > extent:
-            stop = extent
-        tseries[start:stop] = dset[start:stop, lat_index, lon_index ]
-    return tseries
-
 # This function returns a dataframe containing the time-dimension 
 # index and parsed timestamps
 def datetimeIndex(f):
