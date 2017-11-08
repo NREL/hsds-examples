@@ -4,7 +4,7 @@ This repository provides examples and convenience functions for working with the
 
 The WIND Toolkit SDS operates using the HSDS software developed by the [HDF Group](https://www.hdfgroup.org/) and is hosted on Amazon Web Services (AWS) using a combination of EC2 (Elastic Compute) and S3 (Scalable Storage Service). You can read more about the HSDS service [in this slide deck](https://www.slideshare.net/HDFEOS/hdf-cloud-services).
 
-### Getting Started
+### How to Use
 
 To get started, [download Anaconda](https://anaconda.org/anaconda/python) or another distribution of Python, install the h5pyd library:
 
