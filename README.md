@@ -89,9 +89,14 @@ There are two special datasets for indexing and time slicing:
  * datetime (t) - YYYYMMDDHHMMSS datetimestamp for every time in the time dimension
 
 
-# Dataset Units
+## Units
 
-
+ * Pressure: Pa
+ * Temperature: K
+ * Direction: degree
+ * Speed: m s-1
+ * GHI: W m-2
+ * inversemoninobukhovlength_2m: m-1
 
 # Data Access
 
