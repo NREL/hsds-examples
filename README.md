@@ -35,7 +35,15 @@ The data has three dimensions: latitudinal index, longitudinal index, and tempor
 
 ![](https://github.com/NREL/hsds-examples/blob/develop/docs/cube.png)
 
-At any point, there are 37 variables:
+The coordinates are thus defined:
+
+ * t = number of hours since 12AM on the 1st of January, 2011. Up to hour 61368, which would be 7 years worth of data.
+ * y = index of lambert conic coordinates.
+ * x = index of lambert conic coordinates.
+
+At any point there exist 37 variables, or datasets:
+
+Datasets (t,x,y)
 
  * DIF
  * DNI
@@ -75,7 +83,31 @@ At any point, there are 37 variables:
  * windspeed_60m
  * windspeed_80m
 
-To access a subset of data, numpy indexing can be used:
+There are two special datasets for indexing and time slicing:
+
+ * coordinates (y,x) - lat/lon coordinates for every point on the x/y grid (original projection is a modified Lambert Conic)
+ * datetime (t) - YYYYMMDDHHMMSS datetimestamp for every time in the time dimension
+
+
+# Dataset Units
+
+
+
+# Data Access
+
+Use the `h5pyd.File` function to open a connection to the server.
+
+```
+f = h5pyd.File("/nrel/wtk-us.h5", 'r')  
+```
+
+Most datasets can be access with the following pattern:
+
+```
+f[dataset][t,y,x]
+```
+
+The indices support numpy-style indexing, including slices. For example:
 
 ```
 f = h5pyd.File("/nrel/wtk-us.h5", 'r')  
@@ -84,17 +116,22 @@ timeseries = f["windspeed_100m"][:,42,42]
 map = f["windspeed_100m"][42,:,:]
 ```
 
-Downsampling can also be accomplished easily:
+Downsampling can also be accomplished easily by using a numpy-style skip parameter:
 
 ```
 downsampled_map = f["windspeed_100m"][42,::16,::16] # every 16th point
 downsampled_timeseries = f["windspeed_100m"][::24,42,42] # daily (every 24 hours)
 ```
 
-There are two special datasets for indexing and time slicing:
+Special datasets may not have three dimensions.
 
-  * coordinates - lat/lon coordinates for every point on the x/y grid (original projection is a modified Lambert Conic)
-  * datetime - YYYYMMDDHHMMSS datetimestamp for every time in the time dimension
+```
+#retrieve the latitude and longitude of y=0, x=0.
+coordinate = f["coordinates"][0,0]
+
+#retrieve the datetime string for t=0.
+datetime = f["datetime"][0]
+```
 
 ### Credit
 
