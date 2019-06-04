@@ -15,7 +15,7 @@ pip install --user git+http://github.com/HDFGroup/h5pyd.git
 Then, you can make a configuration file at ~/.hscfg with contents like so:
 
 ```
-hs_endpoint = https://developer.nrel.gov/api/hsds/
+hs_endpoint = https://developer.nrel.gov/api/hsds
 hs_username = None
 hs_password = None
 hs_api_key = 3K3JQbjZmWctY0xmIfSYvYgtIcM3CN0cb1Y2w9bf
