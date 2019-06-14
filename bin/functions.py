@@ -191,7 +191,7 @@ class HSDS:
         Returns
         -------
         region_idx : list
-            Index of all sites corresponding to region of interest
+            Indices of all sites corresponding to region of interest
         """
         if column in self.meta:
             col_data = self.meta[column].str.decode('utf-8')
@@ -201,6 +201,23 @@ class HSDS:
                              .format(column))
 
         return region_idx
+
+    def _get_conus_idx(self):
+        """
+        Find sites associated with CONUS
+
+        Returns
+        -------
+        conus_idx : list
+            Indices of all sites in CONUS
+        """
+        country_data = self.meta['country'].str.decode('utf-8')
+        us_idx = country_data == 'United States'
+        state_data = self.meta.loc[us_idx, 'state'].str.decode('utf-8')
+        conus_idx = state_data.isin(['Alaska', 'Hawaii', 'AK', 'HI', 'None'])
+        conus_idx = state_data.index[~conus_idx].values
+
+        return conus_idx
 
     def get_timeseries(self, variable, coords, local=True):
         """
@@ -235,17 +252,14 @@ class HSDS:
 
         return ts
 
-    def get_day(self, variable, state, date, local=True):
+    def get_day(self, variable, date, local=True):
         """
-        Extract time-series data for the given variable at the given
-        coordinates
+        Extract a days worth of data for the given day for CONUS
 
         Parameters
         ----------
         variable : str
             Variable to extract time-series for
-        state : str
-            State to extract map for
         date : str
             Date to extract a days worth of data for
         local : bool
@@ -263,9 +277,10 @@ class HSDS:
             utc_dt = pd.Timedelta('{}h'.format(utc_dt))
             time_index += utc_dt
 
+        date = pd.to_datetime(date).date()
         time_idx = np.where(time_index.date == date)[0]
         time_idx = slice(time_idx[0], time_idx[-1] + 1)
 
-        day = self._h5d[variable][time_idx][region_idx]
+        day = self._h5d[variable][time_idx][:, region_idx]
 
         return day
