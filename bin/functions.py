@@ -1,8 +1,21 @@
-from pyproj import Proj
-import numpy as np
-import pandas as pd
+"""
+HSDS data extraction functions
+"""
 import dateutil
+import h5pyd
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import numpy as np
+import os
+import pandas as pd
+from pyproj import Proj
 from scipy.spatial import cKDTree
+
+mpl.rcParams['font.sans-serif'] = 'DejaVu Sans'
+mpl.rcParams['pdf.fonttype'] = 42
+mpl.rc('xtick', labelsize=16)
+mpl.rc('ytick', labelsize=16)
+mpl.rc('font', size=16)
 
 
 def WTK_idx(wtk, lat_lon):
@@ -88,16 +101,19 @@ class HSDS:
     """
     HSDS Resource handler class
     """
-    def __init__(self, hsds_path):
+    def __init__(self, hsds_path, preload=False):
         """
         Parameters
         ----------
         hsds_path : h5pyd.File instance
         """
         self._h5d = h5pyd.File(hsds_path, mode='r')
-        self._time_index = None
-        self._meta = None
-        self._tree = None
+        if preload:
+            self.preload()
+        else:
+            self._time_index = None
+            self._meta = None
+            self._tree = None
 
     @property
     def time_index(self):
@@ -139,6 +155,18 @@ class HSDS:
             self._tree = cKDTree(site_coords)
 
         return self._tree
+
+    def preload(self):
+        """
+        Preload time_index, meta, and tree
+        """
+        time_index = self._h5d['time_index'][...].astype(str)
+        self._time_index = pd.to_datetime(time_index)
+
+        site_coords = self._h5d['coordinates'][...]
+        self._tree = cKDTree(site_coords)
+
+        self._meta = pd.DataFrame(self._h5d['meta'][...])
 
     def _nearest_site(self, coords):
         """
@@ -270,17 +298,90 @@ class HSDS:
         day : pd.DataFrame
 
         """
-        region_idx = self._get_region_idx(state)
+        conus_idx = self._get_conus_idx()
         time_index = self.time_index
         if local:
-            utc_dt = self.meta.iloc[region_idx]['timezone'].mean()
+            utc_dt = self.meta.iloc[conus_idx]['timezone'].mean()
             utc_dt = pd.Timedelta('{}h'.format(utc_dt))
             time_index += utc_dt
 
         date = pd.to_datetime(date).date()
         time_idx = np.where(time_index.date == date)[0]
-        time_idx = slice(time_idx[0], time_idx[-1] + 1)
+        time_slice = slice(time_idx[0], time_idx[-1] + 1)
 
-        day = self._h5d[variable][time_idx][:, region_idx]
+        day_df = pd.DataFrame(self._h5d[variable][time_slice][:, conus_idx],
+                              index=time_idx, columns=conus_idx)
 
-        return day
+        return day_df
+
+    @staticmethod
+    def create_map(lon, lat, data, cbar_label, f_out, vmax=None,
+                   cmap='Rainbow', dpi=100, figsize=(8, 4)):
+        """
+        Create scatter plot from lon, lat, and data and save to f_out
+
+        Parameters
+        ----------
+        lon : ndarray
+            Longitude vector
+        lat : ndarray
+            Latitude vector
+        cbar_label : str
+            Colorbar label
+        f_out : str
+            File to save plot to
+        vmax : float
+            Max value for colormap
+        cmap : str
+            Colormap to use
+        dpi : int
+            plot resolution
+        figsize : tuple
+            Figure size
+        """
+        fig = plt.figure(figsize=figsize, dpi=dpi)
+        axis = fig.add_subplot(111)
+        if vmax is None:
+            vmax = np.max(data)
+
+        sc = axis.scatter(lon, lat, c=data, cmap=cmap, s=10,
+                          vmin=0, vmax=vmax)
+        cbar = plt.colorbar(sc)
+        cbar.ax.set_ylabel(cbar_label, rotation=90)
+        axis.axis('off')
+        fig.tight_layout()
+        plt.savefig(f_out, dpi=dpi, transparent=True,
+                    bbox_inches='tight')
+
+    @staticmethod
+    def creat_gif(fig_dir, file_prefix):
+        """
+        Create gif from all files in
+        """
+
+    def create_nsrdb_gif(self, date, variable='dni'):
+        """
+        Extract, plot, and create gif for given NSRDB date and variable
+
+        Parameters
+        ----------
+        date : str
+            Date to extract
+        variable : str
+            Variable to extract
+        """
+        day_df = self.get_day(variable, date)
+        label = '{} W/m^2'.format(variable)
+        vmax = np.max(day_df.values)
+        meta = self.meta.iloc[day_df.columns]
+        lon = meta['longitude'].values
+        lat = meta['latitude'].values
+        fig_dir = '../bin/gifs'
+        if not os.path.exists(fig_dir):
+            os.makedirs(fig_dir)
+
+        for i in len(day_df):
+            data = day_df.iloc[i]
+            f_out = os.path.join(fig_dir, 'nsrdb_{:03d}.png'.format(i))
+            self.create_map(lon, lat, data, label, f_out, vmax=vmax,
+                            cmap='YlOrRd')
