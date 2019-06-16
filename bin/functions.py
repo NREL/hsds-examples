@@ -10,12 +10,15 @@ import os
 import pandas as pd
 from pyproj import Proj
 from scipy.spatial import cKDTree
+import seaborn as sns
 
 mpl.rcParams['font.sans-serif'] = 'DejaVu Sans'
 mpl.rcParams['pdf.fonttype'] = 42
-mpl.rc('xtick', labelsize=16)
-mpl.rc('ytick', labelsize=16)
+mpl.rc('xtick', labelsize=14)
+mpl.rc('ytick', labelsize=14)
 mpl.rc('font', size=16)
+sns.set_style("white")
+sns.set_style("ticks")
 
 
 def WTK_idx(wtk, lat_lon):
@@ -274,11 +277,100 @@ class HSDS:
             time_index += utc_dt
 
         ts = self._h5d[variable][:, site_idx]
-        ts = pd.DataFrame({variable: ts, 'datetime': time_index,
-                           'date': time_index.date, 'month': time_index.month,
-                           'day': time_index.day, 'hour': time_index.hour})
+        ts = pd.DataFrame({variable: ts, 'Datetime': time_index,
+                           'Date': time_index.date, 'Month': time_index.month,
+                           'Day': time_index.day, 'Hour': time_index.hour})
 
         return ts
+
+    @staticmethod
+    def create_boxplots(df, variable, dpi=100, figsize=(12, 4)):
+        """
+        Create monthly and diurnal box plots
+        """
+        fig = plt.figure(figsize=figsize, dpi=dpi)
+        ax1 = fig.add_subplot(121)
+        ax2 = fig.add_subplot(122)
+
+        sns.boxplot(x="Month", y=variable, data=df, ax=ax1)
+        ax1.set_xlabel('Month', fontsize=16)
+        ax1.set_ylabel(variable, fontsize=16)
+        sns.boxplot(x="Hour", y=variable, data=df, ax=ax2)
+        ax2.set_xlabel('Hour', fontsize=16)
+        ax2.set_ylabel(variable, fontsize=16)
+        sns.despine(offset=10, trim=False)
+
+        fig.tight_layout()
+        plt.show()
+
+    def get_timestep(self, variable, timestep):
+        """
+        Extract a days worth of data for the given day for CONUS
+
+        Parameters
+        ----------
+        variable : str
+            Variable to extract time-series for
+        timestep : str
+            Datetimestep to extract
+        local : bool
+            Shift time-series to local time
+
+        Returns
+        -------
+        day : pd.DataFrame
+
+        """
+        conus_idx = self._get_conus_idx()
+        time_idx = self._nearest_timestep(pd.to_datetime(timestep))
+        meta = self.meta.iloc[conus_idx]
+        lon = meta['longitude'].values
+        lat = meta['latitude'].values
+        data = self._h5d[variable][time_idx][conus_idx]
+
+        df = pd.DataFrame({'longitude': lon, 'latitude': lat, variable: data})
+
+        return df
+
+    @staticmethod
+    def create_scatter(df, variable, cbar_label=None, title=None,
+                       cmap='Rainbow', dpi=100, figsize=(8, 4)):
+        """
+        Create scatter plot from lon, lat, and data and save to f_out
+
+        Parameters
+        ----------
+        df : pd.DataFrame
+            DataFrame containing data to plot
+        cbar_label : str
+            Colorbar label
+        title : str
+            Title to plot
+        cmap : str
+            Colormap to use
+        dpi : int
+            plot resolution
+        figsize : tuple
+            Figure size
+        """
+        fig = plt.figure(figsize=figsize, dpi=dpi)
+        if title is not None:
+            fig.suptitle(title, fontsize=16)
+
+        ax = fig.add_subplot(111)
+        lon = df['longitude'].values
+        lat = df['latitude'].values
+        data = df[variable].values
+        if cbar_label is None:
+            cbar_label = variable
+        vmax = np.max(data)
+
+        sc = ax.scatter(lon, lat, c=data, cmap=cmap, vmin=0, vmax=vmax)
+        cbar = plt.colorbar(sc)
+        cbar.ax.set_ylabel(cbar_label, rotation=90)
+        ax.axis('off')
+        fig.tight_layout()
+        plt.show()
 
     def get_day(self, variable, date, local=True):
         """
@@ -315,8 +407,8 @@ class HSDS:
         return day_df
 
     @staticmethod
-    def create_map(lon, lat, data, cbar_label, f_out, vmax=None,
-                   cmap='Rainbow', dpi=100, figsize=(8, 4)):
+    def create_map(lon, lat, data, cbar_label, f_out=None, vmax=None,
+                   title=None, cmap='Rainbow', dpi=100, figsize=(8, 4)):
         """
         Create scatter plot from lon, lat, and data and save to f_out
 
@@ -340,18 +432,24 @@ class HSDS:
             Figure size
         """
         fig = plt.figure(figsize=figsize, dpi=dpi)
-        axis = fig.add_subplot(111)
+        if title is not None:
+            fig.suptitle(title, fontsize=16)
+
+        ax = fig.add_subplot(111)
         if vmax is None:
             vmax = np.max(data)
 
-        sc = axis.scatter(lon, lat, c=data, cmap=cmap, s=10,
-                          vmin=0, vmax=vmax)
+        sc = ax.scatter(lon, lat, c=data, cmap=cmap, s=10,
+                        vmin=0, vmax=vmax)
         cbar = plt.colorbar(sc)
         cbar.ax.set_ylabel(cbar_label, rotation=90)
-        axis.axis('off')
+        ax.axis('off')
         fig.tight_layout()
-        plt.savefig(f_out, dpi=dpi, transparent=True,
-                    bbox_inches='tight')
+        if f_out is not None:
+            plt.savefig(f_out, dpi=dpi, transparent=True,
+                        bbox_inches='tight')
+        else:
+            plt.show()
 
     @staticmethod
     def creat_gif(fig_dir, file_prefix):
