@@ -39,7 +39,7 @@ jupyter notebook
 
 The data has three dimensions: latitudinal index, longitudinal index, and temporal index and is arranged in a uniform matrix:
 
-![](https://github.com/NREL/hsds-examples/blob/master/docs/cube.png)
+![](https://github.com/NREL/hsds-examples/blob/master/bin/docs/cube.png?raw=true)
 
 The coordinates are thus defined:
 
