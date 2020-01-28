@@ -47,6 +47,8 @@ The coordinates are thus defined:
  * y = index of lambert conic coordinates.
  * x = index of lambert conic coordinates.
 
+*Note: All data are instantaneous in time.*
+
 At any point there exist 37 variables, or datasets:
 
 Datasets (t,x,y)
