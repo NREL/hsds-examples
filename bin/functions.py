@@ -276,7 +276,8 @@ class HSDS:
             utc_dt = pd.Timedelta('{}h'.format(utc_dt))
             time_index += utc_dt
 
-        ts = self._h5d[variable][:, site_idx]
+        ds = self._h5d[variable]
+        ts = ds[:, site_idx] / ds.attrs.get('scale_factor', 1)
         ts = pd.DataFrame({variable: ts, 'Datetime': time_index,
                            'Date': time_index.date, 'Month': time_index.month,
                            'Day': time_index.day, 'Hour': time_index.hour})
@@ -326,7 +327,9 @@ class HSDS:
         meta = self.meta.iloc[conus_idx]
         lon = meta['longitude'].values
         lat = meta['latitude'].values
-        data = self._h5d[variable][time_idx][conus_idx]
+        ds = self._h5d[variable]
+        sf = ds.attrs.get('scale_factor', 1)
+        data = self._h5d[variable][time_idx][conus_idx] / sf
 
         df = pd.DataFrame({'longitude': lon, 'latitude': lat, variable: data})
 
