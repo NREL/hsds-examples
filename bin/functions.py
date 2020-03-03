@@ -270,7 +270,7 @@ class HSDS:
             Time-series DataFrame
         """
         site_idx = self._nearest_site(coords)
-        time_index = self.time_index
+        time_index = self.time_index.copy()
         if local:
             utc_dt = self.meta.iloc[site_idx]['timezone']
             utc_dt = pd.Timedelta('{}h'.format(utc_dt))
