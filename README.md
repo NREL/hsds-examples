@@ -9,10 +9,16 @@ The WIND Toolkit SDS operates using the HSDS software developed by the [HDF Grou
 To get started, [download Anaconda](https://anaconda.org/anaconda/python) or another distribution of Python, install the h5pyd library:
 
 ```
-pip install --user git+http://github.com/HDFGroup/h5pyd.git
+pip install --user h5pyd
 ```
 
-Then, you can make a configuration file at ~/.hscfg with contents like so:
+Next you'll need to configure HSDS:
+
+```
+hsconfigure
+```
+
+and enter at the prompt:
 
 ```
 hs_endpoint = https://developer.nrel.gov/api/hsds
@@ -22,6 +28,8 @@ hs_api_key = 3K3JQbjZmWctY0xmIfSYvYgtIcM3CN0cb1Y2w9bf
 ```
 
 *The example API key here is for demonstation and is rate-limited per IP. To get your own API key, visit https://developer.nrel.gov/signup/*
+
+You can also add the above contents to a configuration file at ~/.hscfg
 
 Finally, you can use Jupyter Notebook to view the example notebooks:
 
@@ -111,7 +119,7 @@ There are two special datasets for indexing and time slicing:
 Use the `h5pyd.File` function to open a connection to the server.
 
 ```
-f = h5pyd.File("/nrel/wtk-us.h5", 'r')  
+f = h5pyd.File("/nrel/wtk-us.h5", 'r')
 ```
 
 Most datasets can be access with the following pattern:
@@ -123,7 +131,7 @@ f[dataset][t,y,x]
 The indices support numpy-style indexing, including slices. For example:
 
 ```
-f = h5pyd.File("/nrel/wtk-us.h5", 'r')  
+f = h5pyd.File("/nrel/wtk-us.h5", 'r')
 one_value = f["windspeed_100m"][42,42,42]
 timeseries = f["windspeed_100m"][:,42,42]
 map = f["windspeed_100m"][42,:,:]
@@ -152,7 +160,7 @@ datetime = f["datetime"][0]
 
 #### Data Layout
 
-Data is saved in individual files by year. With in each file the data has two dimensions:  
+Data is saved in individual files by year. With in each file the data has two dimensions:
 temporal index, location index
 
 The coordinates are thus defined:
@@ -201,7 +209,7 @@ Units are provided for each dataset as an attached attribute: 'psm_unit'
 All datasets have been scaled to integers to improve performance, the scale factor used
 is saved for each dataset as an attached attribute: 'psm_scale_factor'
 
-Values are unscaled as follows:  
+Values are unscaled as follows:
 native_value = hsds_value / psm_scale_factor
 
 #### Data Access
@@ -209,7 +217,7 @@ native_value = hsds_value / psm_scale_factor
 Use the `h5pyd.File` function to open a connection to the server.
 
 ```
-f = h5pyd.File("/nrel/nsrdb_2012.h5", 'r')  
+f = h5pyd.File("/nrel/nsrdb_2012.h5", 'r')
 ```
 
 Most datasets can be access with the following pattern:
@@ -221,7 +229,7 @@ f[dataset][t, s]
 The indices support numpy-style indexing, including slices. For example:
 
 ```
-f = h5pyd.File("/nrel/wtk-us.h5", 'r')  
+f = h5pyd.File("/nrel/wtk-us.h5", 'r')
 one_value = f["ghi"][42, 42]
 timeseries = f["ghi"][:, 42]
 map = f["ghi"][42, :]
