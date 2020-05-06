@@ -1,8 +1,12 @@
-# NREL Wind Toolkit Scalable Data Service Examples
+# NREL Highly Scalable Data Service (HSDS) Examples
 
-This repository provides examples and convenience functions for working with the National Renewable Energy Laboratory (NREL) Wind Integration National Dataset (WIND) Toolkit Scalable Data Service (SDS).
+NREL's HSDS service provides public access to several of DOEs high-value datasets available internally on the [Eagle HCP System](https://www.nrel.gov/hpc/eagle-datasets.html). Due to the high demand for the HSDS service, **users with access to NREL’s HPC should pursue direct access through that system.**
 
-The WIND Toolkit SDS operates using the HSDS software developed by the [HDF Group](https://www.hdfgroup.org/) and is hosted on Amazon Web Services (AWS) using a combination of EC2 (Elastic Compute) and S3 (Scalable Storage Service). You can read more about the HSDS service [in this slide deck](https://www.slideshare.net/HDFEOS/hdf-cloud-services).
+This repository provides examples and convenience functions for accessing the below datasets using HSDS:
+- [Wind Integration National Dataset (WIND) Toolkit](https://www.nrel.gov/grid/wind-toolkit.html)
+- [National Solar Radiation Database (NSRDB)](https://nsrdb.nrel.gov/)
+
+This service operates with the HSDS software developed by the [HDF Group](https://www.hdfgroup.org/) and is hosted on Amazon Web Services (AWS) using a combination of EC2 (Elastic Compute) and S3 (Scalable Storage Service). You can read more about the HSDS service [in this slide deck](https://www.slideshare.net/HDFEOS/hdf-cloud-services).
 
 ## How to Use
 
