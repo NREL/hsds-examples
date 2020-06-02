@@ -43,7 +43,7 @@ jupyter notebook
 ```
 
 ## Datasets
-### Wind Integration National Dataset (WIND Toolkit)
+### Wind Integration National Dataset (WIND Toolkit) Gridded Data Cube
 
 /nrel/wtk_us.h5
 
@@ -158,9 +158,126 @@ coordinate = f["coordinates"][0,0]
 datetime = f["datetime"][0]
 ```
 
+### Wind Integration National Dataset (WIND Toolkit)
+
+/nrel/nsrdb/wtk/${country}/wtk_${country}_${year}.h5
+
+#### Data Layout
+
+Data is saved in individual files by year. With in each file the data has two dimensions:
+temporal index, location index
+
+The coordinates are thus defined:
+ * t = number of intervals since 12AM on the 1st of January
+ * s = site index
+
+At any point there exist 34 variables, or datasets:
+
+Datasets (t, s)
+ * inversemoninobukhovlength_2m
+ * precipitationrate_0m
+ * pressure_0m
+ * pressure_100m
+ * pressure_200m
+ * relativehumidity_2m
+ * temperature_100m
+ * temperature_10m
+ * temperature_120m
+ * temperature_140m
+ * temperature_160m
+ * temperature_200m
+ * temperature_2m
+ * temperature_40m
+ * temperature_60
+ * temperature_80m
+ * winddirection_100m
+ * winddirection_10m
+ * winddirection_120m
+ * winddirection_140m
+ * winddirection_160m
+ * winddirection_200m
+ * winddirection_40m
+ * winddirection_60m
+ * winddirection_80m
+ * windspeed_100m
+ * windspeed_10m
+ * windspeed_120m
+ * windspeed_140m
+ * windspeed_160m
+ * windspeed_200m
+ * windspeed_40m
+ * windspeed_60m
+ * windspeed_80m
+
+There are three special datasets for indexing and time slicing:
+
+ * coordinates (y, x) - lat/lon coordinates for every site
+ * meta (table) - table of meta data for each site
+ * time_index (t) - YYYY-MM-DD HH:MM:SS datetimestamp for every time in the time dimension
+
+
+#### Units
+
+Units are provided for each dataset as an attached attribute: 'unit'
+All datasets have been scaled to integers to improve performance, the scale factor used
+is saved for each dataset as an attached attribute: 'scale_factor'
+
+Values are unscaled as follows:
+native_value = hsds_value / scale_factor
+
+#### Data Access
+
+Use the `h5pyd.File` function to open a connection to the server.
+
+```
+f = h5pyd.File("/nrel/wtk/conus/wtk_conus_2012.h5", 'r')
+```
+
+Most datasets can be access with the following pattern:
+
+```
+f[dataset][t, s]
+```
+
+The indices support numpy-style indexing, including slices. For example:
+
+```
+f = h5pyd.File("/nrel/wtk/conus/wtk_conus_2012.h5", 'r')
+one_value = f["windspeed_100m"][42, 42]
+timeseries = f["windspeed_100m"][:, 42]
+map = f["windspeed_100m"][42, :]
+```
+
+Downsampling can also be accomplished easily by using a numpy-style skip parameter:
+
+```
+downsampled_map = f["windspeed_100m"][42, ::16] # every 16th point
+downsampled_timeseries = f["windspeed_100m"][::24, 42,] # daily (every 24 hours)
+```
+
+Special datasets may not have three dimensions.
+
+```
+#retrieve the latitude and longitude of site 0
+coordinate = f["coordinates"][0]
+
+#retrieve the meta-data for site 0
+meta = f['meta'][0]
+
+#retrieve the datetime string for t=0.
+datetime = f["time_index"][0]
+```
+
+To access the native values please use the following pattern:
+```
+ds = f[dataset]
+scale_factor = ds.attrs['scale_factor']
+native_values = ds[...] / scale_factor
+```
+
 ### National Solar Radiation Database (NSRDB)
 
-/nrel/nsrdb/nsrdb_${year}.h5
+/nrel/nsrdb/v3/nsrdb_${year}.h5
 
 #### Data Layout
 
@@ -221,7 +338,7 @@ native_value = hsds_value / psm_scale_factor
 Use the `h5pyd.File` function to open a connection to the server.
 
 ```
-f = h5pyd.File("/nrel/nsrdb_2012.h5", 'r')
+f = h5pyd.File("/nrel/nsrdb/v3/nsrdb_2012.h5", 'r')
 ```
 
 Most datasets can be access with the following pattern:
@@ -233,7 +350,7 @@ f[dataset][t, s]
 The indices support numpy-style indexing, including slices. For example:
 
 ```
-f = h5pyd.File("/nrel/wtk-us.h5", 'r')
+f = h5pyd.File("/nrel/nsrdb/v3/nsrdb_2012.h5", 'r')
 one_value = f["ghi"][42, 42]
 timeseries = f["ghi"][:, 42]
 map = f["ghi"][42, :]
