@@ -44,10 +44,10 @@ jupyter notebook
 
 ## Datasets
 
-- [/nrel/wtk_us.h5](hsds-examples/blob/master/datasets/wtk-us.md)
-- [/nrel/wtk/](hsds-examples/blob/master/datasets/WINDToolkit.md)
-- [/nrel/wtk-5min/](hsds-examples/blob/master/datasets/WINDToolkit.md)
-- [/nrel/nsrdb/](hsds-examples/blob/master/datasets/NSRDB.md)
+- [/nrel/wtk_us.h5](datasets/wtk-us.md)
+- [/nrel/wtk/](datasets/WINDToolkit.md)
+- [/nrel/wtk-5min/](datasets/WINDToolkit.md)
+- [/nrel/nsrdb/](datasets/NSRDB.md)
 
 ## Credit
 
