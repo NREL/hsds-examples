@@ -1,6 +1,9 @@
 # High Resolution Ocean Surface Wave Hindcast
 
-/nrel/us-wave/US_Wave_${year}.h5
+- /nrel/us-wave/
+  - US_Wave_1979.h5
+  - ...
+  - US_Wave_2010.h5
 
 ## Description
 
@@ -66,16 +69,6 @@ and peer-reviewed publications (Wu et al. 2020, Yang et al. 2020, Yang et al.
 2018). This study was funded by the U.S. Department of Energy, Office of Energy
 Efficiency & Renewable Energy, Water Power Technologies Office under Contract
 DE-AC05-76RL01830 to Pacific Northwest National Laboratory (PNNL).
-
-## Directory structure
-
-High Resolution Ocean Surface Wave Hindcast data is made available as a series
-of hourly .h5 located on AWS S3:
-- `s3://wpto-pds-us-wave/v1.0.0`
-
-
-The US wave data is also available via HSDS at `/nrel/us-wave`
-For examples on setting up and using HSDS please see our [examples repository](https://github.com/nrel/hsds-examples)
 
 ## Data Format
 

@@ -1,6 +1,32 @@
 # Solar Resource Data: National Solar Radiation Database (NSRDB)
 
-/nrel/nsrdb/
+- /nrel/nsrdb/
+  - 2018/
+    - nsrdb_conus_2018.h5
+    - nsrdb_full_disc_2018.h5
+  - india/
+    - india_spectral_tmy.h5
+    - nsrdb_india_2000.h5
+    - ...
+    - nsrdb_india_2014.h5
+    - nsrdb_india_tmy.h5
+  - puerto_rico/
+    - nsrdb_puerto_rico_1998.h5
+    - ...
+    - nsrdb_puerto_rico_2017.h5
+  - v3/
+    - nsrdb_1998.h5
+    - ...
+    - nsrdb_2018.h5
+    - nsrdb_tdy-2016.h5
+    - ...
+    - nsrdb_tdy-2018.h5
+    - nsrdb_tgy-2016.h5
+    - ...
+    - nsrdb_tgy-2018.h5
+    - nsrdb_tmy-2016.h5
+    - ...
+    - nsrdb_tmy-2018.h5
 
 ## NSRDB
 
@@ -55,15 +81,6 @@ The following variables are provided by the NSRDB:
 - cloud_press_acha
 - Reduced ozone vertical pathlength (ozone)
 - Aerosol single-scatter albedo (ssa)
-
-## Directory structure
-
-Solar resource data is made available as a series of .h5 files corresponding to
-each year and can be found at s3://nrel-pds-nsrdb/hdf5-source-files-v3/nsrdb_${year}.h5
-
-The NSRDB data is also available via HSDS at /nrel/nsrdb/nsrdb_${year}.h5
-
-For examples on setting up and using HSDS please see our [examples repository](https://github.com/nrel/hsds-examples)
 
 ## Data Format
 
