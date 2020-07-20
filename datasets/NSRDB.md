@@ -1,9 +1,12 @@
 # Solar Resource Data: National Solar Radiation Database (NSRDB)
 
 - /nrel/nsrdb/
-  - 2018/
+  - conus/
     - nsrdb_conus_2018.h5
+    - nsrdb_conus_2019.h5
+  - full_disc/
     - nsrdb_full_disc_2018.h5
+    - nsrdb_full_disc_2019.h5
   - india/
     - india_spectral_tmy.h5
     - nsrdb_india_2000.h5
