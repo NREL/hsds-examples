@@ -13,23 +13,30 @@
     - ...
     - nsrdb_india_2014.h5
     - nsrdb_india_tmy.h5
+  - meteosat/
+    - meteosat_2017.h5
+    - meteosat_2017.h5
+  - philippines/
+    - philippines_2017.h5
   - puerto_rico/
     - nsrdb_puerto_rico_1998.h5
     - ...
     - nsrdb_puerto_rico_2017.h5
+  - vietnam/
+    - vietnam_2016.h5
   - v3/
     - nsrdb_1998.h5
     - ...
-    - nsrdb_2018.h5
+    - nsrdb_2019.h5
     - nsrdb_tdy-2016.h5
     - ...
-    - nsrdb_tdy-2018.h5
+    - nsrdb_tdy-2019.h5
     - nsrdb_tgy-2016.h5
     - ...
-    - nsrdb_tgy-2018.h5
+    - nsrdb_tgy-2019.h5
     - nsrdb_tmy-2016.h5
     - ...
-    - nsrdb_tmy-2018.h5
+    - nsrdb_tmy-2019.h5
 
 ## NSRDB
 

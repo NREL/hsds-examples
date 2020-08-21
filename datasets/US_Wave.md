@@ -1,9 +1,13 @@
 # High Resolution Ocean Surface Wave Hindcast
 
-- /nrel/us-wave/
-  - US_Wave_1979.h5
+- /nrel/US_wave/
+  - US_wave_1979.h5
   - ...
-  - US_Wave_2010.h5
+  - US_wave_2010.h5
+  - virtual_buoy/
+    - US_virtual_buoy_1979.h5
+    - ...
+    - US_virtual_buoy_2010.h5
 
 ## Description
 

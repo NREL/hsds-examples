@@ -5,25 +5,25 @@
     - wtk_bangladesh_2014.h5
     - ...
     - wtk_bangladesh_2017.h5
-  - canada/
+  - canada/ # hourly resolution
     - wtk_canada_2007.h5
     - ...
     - wtk_canada_2014.h5
-  - canada-5min/
+  - canada_bc/ # Bias corrected hourly resolution
     - wtk_canada_2007.h5
     - ...
     - wtk_canada_2014.h5
-  - canada_bc/ # Bias Corrected
+  - canada-5min/ # 5min resolution
     - wtk_canada_2007.h5
     - ...
     - wtk_canada_2014.h5
   - central_asia/
     - wtk_central_asia_2015.h5
-  - conus/
+  - conus/ # hourly resolution
     - wtk_conus_2007.h5
     - ...
     - wtk_conus_2014.h5
-  - conus-5min/
+  - conus-5min/ # 5min resolution
     - wtk_conus_2007.h5
     - ...
     - wtk_conus_2014.h5
@@ -32,11 +32,11 @@
   - kazakhstan/
     - wtk_kazakhstan_11km_2015.h5
     - wtk_kazakhstan_4km_2015.h5
-  - mexico/
+  - mexico/ # hourly resolution
     - wtk_mexico_2007.h5
     - ...
     - wtk_mexico_2014.h5
-  - mexico-5min/
+  - mexico-5min/ # 5min resolution
     - wtk_mexico_2007.h5
     - ...
     - wtk_mexico_2014.h5
