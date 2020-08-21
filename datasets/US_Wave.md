@@ -93,10 +93,10 @@ The easiest way to access and extract data from the Resource eXtraction tool
 
 
 ```python
-from rex import ResourceX
+from rex import WaveX
 
 wave_file = '/nrel/us-wave/US_wave_2010.h5'
-with ResourceX(wave_file, hsds=True) as f:
+with WaveX(wave_file, hsds=True) as f:
     meta = f.meta
     time_index = f.time_index
     swh = f['significant_wave_height']
@@ -106,22 +106,22 @@ with ResourceX(wave_file, hsds=True) as f:
 location:
 
 ```python
-from rex import ResourceX
+from rex import WaveX
 
 wave_file = '/nrel/us-wave/US_wave_2010.h5'
 lat_lon = (34.399408, -119.841181)
-with ResourceX(wave_file, hsds=True) as f:
+with WaveX(wave_file, hsds=True) as f:
     lat_lon_swh = f.get_lat_lon_df('significant_wave_height', nwtc)
 ```
 
 or to extract all sites in a given region:
 
 ```python
-from rex import ResourceX
+from rex import WaveX
 
 wave_file = '/nrel/us-wave/US_wave_2010.h5'
 jurisdication='California'
-with ResourceX(wave_file, hsds=True) as f:
+with WaveX(wave_file, hsds=True) as f:
     ca_swh = f.get_region_df('significant_wave_height', jurisdiction,
                              region_col='jurisdiction')
 ```
