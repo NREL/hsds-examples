@@ -15,7 +15,7 @@
     - nsrdb_india_tmy.h5
   - meteosat/
     - meteosat_2017.h5
-    - meteosat_2017.h5
+    - meteosat_2018.h5
   - philippines/
     - philippines_2017.h5
   - puerto_rico/
