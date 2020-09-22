@@ -27,6 +27,14 @@
     - wtk_conus_2007.h5
     - ...
     - wtk_conus_2014.h5
+  - hawaii/ # hourly resolution
+    - Hawaii_2000.h5
+    - ...
+    - Hawaii_2019.h5
+  - hawaii-5min/ # 5min resolution
+    - Hawaii_2000.h5
+    - ...
+    - Hawaii_2019.h5
   - india/
     - wtk_india_2014.h5
   - kazakhstan/
@@ -48,6 +56,8 @@
     - wtk_philippines_2017.h5
   - vietnam/
     - wtk_vietnam_2016.h5
+    - ...
+    - wtk_vietnam_2018.h5
 
 ## Model
 
