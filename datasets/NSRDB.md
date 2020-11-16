@@ -13,6 +13,10 @@
     - ...
     - nsrdb_india_2014.h5
     - nsrdb_india_tmy.h5
+  - himawari/
+    - himawari_2015.h5
+    - ...
+    - himawari_2019.h5
   - meteosat/
     - meteosat_2017.h5
     - meteosat_2018.h5
@@ -28,15 +32,18 @@
     - nsrdb_1998.h5
     - ...
     - nsrdb_2019.h5
-    - nsrdb_tdy-2016.h5
-    - ...
-    - nsrdb_tdy-2019.h5
-    - nsrdb_tgy-2016.h5
-    - ...
-    - nsrdb_tgy-2019.h5
-    - nsrdb_tmy-2016.h5
-    - ...
-    - nsrdb_tmy-2019.h5
+    - tdy/
+      - nsrdb_tdy-2016.h5
+      - ...
+      - nsrdb_tdy-2019.h5
+    - tgy/
+      - nsrdb_tgy-2016.h5
+      - ...
+      - nsrdb_tgy-2019.h5
+    - tmy/
+      - nsrdb_tmy-2016.h5
+      - ...
+      - nsrdb_tmy-2019.h5
 
 ## NSRDB
 

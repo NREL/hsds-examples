@@ -48,7 +48,19 @@
     - wtk_mexico_2007.h5
     - ...
     - wtk_mexico_2014.h5
+  - nw_pacific/
+    - NW_Pacific_2000.h5
+    - ...
+    - NW_Pacific_2019.h5
+  - nw_pacific-5min/ # 5min resolution
+    - NW_Pacific_2000.h5
+    - ...
+    - NW_Pacific_2019.h5
   - offshore_ca/
+    - Offshore_CA_2000.h5
+    - ...
+    - Offshore_CA_2019.h5
+  - offshore_ca-5min/ # 5min resolution
     - Offshore_CA_2000.h5
     - ...
     - Offshore_CA_2019.h5
