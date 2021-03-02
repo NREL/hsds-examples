@@ -48,7 +48,15 @@
     - wtk_mexico_2007.h5
     - ...
     - wtk_mexico_2014.h5
-  - nw_pacific/
+  - mid_atlantic/ # hourly resolution
+    - Mid_Atlantic_2000.h5
+    - ...
+    - Mid_Atlantic_2020.h5
+  - mid_atlantic-5min/ # 5min resolution
+    - Mid_Atlantic_2000.h5
+    - ...
+    - Mid_Atlantic_2020.h5
+  - nw_pacific/ # hourly resolution
     - NW_Pacific_2000.h5
     - ...
     - NW_Pacific_2019.h5
@@ -56,7 +64,7 @@
     - NW_Pacific_2000.h5
     - ...
     - NW_Pacific_2019.h5
-  - offshore_ca/
+  - offshore_ca/ # hourly resolution
     - Offshore_CA_2000.h5
     - ...
     - Offshore_CA_2019.h5
