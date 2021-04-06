@@ -1,13 +1,23 @@
-# High Resolution Ocean Surface Wave Hindcast
+# DOE Water Power Technology Office's (WPTO) US Wave dataset
 
 - /nrel/US_wave/
-  - US_wave_1979.h5
-  - ...
-  - US_wave_2010.h5
-  - virtual_buoy/
-    - US_virtual_buoy_1979.h5
+  - Atlantic/
+    - Atlantic_wave_1979.h5
     - ...
-    - US_virtual_buoy_2010.h5
+    - Atlantic_wave_2010.h5
+  - Hawaii/
+    - Hawaii_wave_1979.h5
+    - ...
+    - Hawaii_wave_2010.h5
+  - West_Coast/
+    - West_Coast_wave_1979.h5
+    - ...
+    - West_Coast_wave_2010.h5
+  - virtual_buoy/
+    - West_Coast/
+      - West_Coast_virtual_buoy_1979.h5
+      - ...
+      - West_Coast_virtual_buoy_2010.h5
 
 ## Description
 
@@ -46,12 +56,12 @@ Currently the dataset only covers the EEZ offshore of the U.S. West Coast, but
 it will be updated to include all other U.S. regions by 2022.
 The timeline for extending the dataset is as follows:
 
-- West Coast United States: Dataset Available
-- East Coast United States: TBD
-- Alaskan Coast: October 2020
-- Hawaiian Islands: October 2020
+- West Coast United States: Available
+- East Coast United States: Available
+- Alaskan Coast: TBD
+- Hawaiian Islands: Available
 - Gulf of Mexico, Puerto Rico, and U.S. Virgin Islands: TBD
-- U.S. Pacific Island Territories: Dec 2021
+- U.S. Pacific Island Territories: TBD
 
 ## Model
 
@@ -91,6 +101,31 @@ Example scripts to extract wind resource data using python are provided below:
 The easiest way to access and extract data from the Resource eXtraction tool
 [`rex`](https://github.com/nrel/rex)
 
+To use `rex` with [`HSDS`](https://github.com/NREL/hsds-examples) you will need
+to install `h5pyd`:
+
+```
+pip install h5pyd
+```
+
+Next you'll need to configure HSDS:
+
+```
+hsconfigure
+```
+
+and enter at the prompt:
+
+```
+hs_endpoint = https://developer.nrel.gov/api/hsds
+hs_username = None
+hs_password = None
+hs_api_key = 3K3JQbjZmWctY0xmIfSYvYgtIcM3CN0cb1Y2w9bf
+```
+
+**IMPORTANT: The example API key here is for demonstation and is rate-limited per IP. To get your own API key, visit https://developer.nrel.gov/signup/**
+
+You can also add the above contents to a configuration file at `~/.hscfg`
 
 ```python
 from rex import WaveX

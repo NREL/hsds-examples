@@ -48,6 +48,7 @@ jupyter notebook
 - [/nrel/wtk/](datasets/WINDToolkit.md)
 - [/nrel/wtk-5min/](datasets/WINDToolkit.md)
 - [/nrel/nsrdb/](datasets/NSRDB.md)
+- [/nrel/US_wave/](datasets/US_Wave.md)
 
 ## Credit
 
