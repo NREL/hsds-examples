@@ -118,8 +118,8 @@ and enter at the prompt:
 
 ```
 hs_endpoint = https://developer.nrel.gov/api/hsds
-hs_username = None
-hs_password = None
+hs_username =
+hs_password =
 hs_api_key = 3K3JQbjZmWctY0xmIfSYvYgtIcM3CN0cb1Y2w9bf
 ```
 
