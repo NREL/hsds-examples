@@ -3,10 +3,12 @@
 - /nrel/nsrdb/
   - conus/
     - nsrdb_conus_2018.h5
-    - nsrdb_conus_2019.h5
+    - ...
+    - nsrdb_conus_20202.h5
   - full_disc/
     - nsrdb_full_disc_2018.h5
-    - nsrdb_full_disc_2019.h5
+    - ...
+    - nsrdb_full_disc_2020.h5
   - india/
     - india_spectral_tmy.h5
     - nsrdb_india_2000.h5
@@ -14,9 +16,12 @@
     - nsrdb_india_2014.h5
     - nsrdb_india_tmy.h5
   - himawari/
-    - himawari_2015.h5
+    - himawari7_2011.h5
     - ...
-    - himawari_2019.h5
+    - himawari7_2015.h5
+    - himawari8_2015.h5
+    - ...
+    - himawari8_2020.h5
   - meteosat/
     - meteosat_2017.h5
     - meteosat_2018.h5
@@ -31,19 +36,19 @@
   - v3/
     - nsrdb_1998.h5
     - ...
-    - nsrdb_2019.h5
+    - nsrdb_2020.h5
     - tdy/
       - nsrdb_tdy-2016.h5
       - ...
-      - nsrdb_tdy-2019.h5
+      - nsrdb_tdy-2020.h5
     - tgy/
       - nsrdb_tgy-2016.h5
       - ...
-      - nsrdb_tgy-2019.h5
+      - nsrdb_tgy-2020.h5
     - tmy/
       - nsrdb_tmy-2016.h5
       - ...
-      - nsrdb_tmy-2019.h5
+      - nsrdb_tmy-2020.h5
 
 ## NSRDB
 
