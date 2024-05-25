@@ -51,7 +51,7 @@ loglevel = logging.DEBUG
 logging.basicConfig(format='%(asctime)s %(message)s', level=loglevel)
 
 if filepath.startswith("hdf5://"):
-    f = h5pyd.File(filepath)
+    f = h5pyd.File(filepath, bucket="nrel-pds-hsds")
 else:
     f = h5py.File(filepath)
 
