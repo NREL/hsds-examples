@@ -1,10 +1,70 @@
 # Wind Resource Data: Wind Integration National Dataset (WIND) Toolkit
 
 - /nrel/wtk/
+  - NOW-WAKES_Mid_Atlantic/
+    - Call_Areas_100TKE/
+      - v1.0.0/
+        - 2019-09.h5
+        - 2019-10.h5
+        - 2020-07.h5
+        - 2020-08.h5
+    - Lease_Areas_0TKE/
+      - v1.0.0/
+        - 2019-09.h5
+        - ...
+        - 2019-12.h5
+        - 2020-01.h5
+        - ...
+        - 2020-08.h5
+    - Lease_Areas_100TKE/
+      - v1.0.0/
+        - 2019-09.h5
+        - ...
+        - 2019-12.h5
+        - 2020-01.h5
+        - ...
+        - 2020-08.h5
+    - No_Wind_Farms/
+      - v1.0.0/
+        - 2019-09.h5
+        - ...
+        - 2019-12.h5
+        - 2020-01.h5
+        - ...
+        - 2020-08.h5
+    - One_Plant_0TKE/
+      - v1.0.0/
+        - 2019-09.h5
+        - ...
+        - 2019-12.h5
+        - 2020-01.h5
+        - ...
+        - 2020-08.h5
+    - One_Plant_100TKE/
+      - v1.0.0/
+        - 2019-09.h5
+        - ...
+        - 2019-12.h5
+        - 2020-01.h5
+        - ...
+        - 2020-08.h5
+  - alaska/
+    - v1.0.0/
+      - 5min/
+        - alaska_2018.h5
+        - ...
+        - alaska_2020.h5
+      - alaska_2018.h5
+      - ...
+      - alaska_2020.h5
   - bangladesh/
     - wtk_bangladesh_2014.h5
     - ...
     - wtk_bangladesh_2017.h5
+  - canada-5min/ # 5min resolution
+    - wtk_canada_2007.h5
+    - ...
+    - wtk_canada_2014.h5
   - canada/ # hourly resolution
     - wtk_canada_2007.h5
     - ...
@@ -13,25 +73,43 @@
     - wtk_canada_2007.h5
     - ...
     - wtk_canada_2014.h5
-  - canada-5min/ # 5min resolution
-    - wtk_canada_2007.h5
-    - ...
-    - wtk_canada_2014.h5
   - central_asia/
     - wtk_central_asia_2015.h5
+  - conus-5min/ # 5min resolution
+    - v2.0.0/
+      - conus_2018.h5
+      - ...
+      - conus_2020.h5
+    - wtk_conus_2007.h5
+    - ...
+    - wtk_conus_2014.h5
   - conus/ # hourly resolution
     - wtk_conus_2007.h5
     - ...
     - wtk_conus_2014.h5
-  - conus-5min/ # 5min resolution
-    - wtk_conus_2007.h5
+    - wtk_conus_2019.h5
+    - wtk_conus_2020.h5
+  - great_lakes-5min/
+    - Great_Lakes_2000.h5
     - ...
-    - wtk_conus_2014.h5
-  - hawaii/ # hourly resolution
+    - Great_Lakes_2020.h5
+  - great_lakes/
+    - Great_Lakes_2000.h5
+    - ...
+    - Great_Lakes_2020.h5
+  - gulf_of_mexico/
+    - gulf_2000.h5
+    - ...
+    - gulf_2020.h5
+    - yearly_hr/
+      - gulf_2000_hr.h5
+      - ...
+      - gulf_2020_hr.h5
+  - hawaii-5min/ # 5min resolution
     - Hawaii_2000.h5
     - ...
     - Hawaii_2019.h5
-  - hawaii-5min/ # 5min resolution
+  - hawaii/ # hourly resolution
     - Hawaii_2000.h5
     - ...
     - Hawaii_2019.h5
@@ -40,40 +118,125 @@
   - kazakhstan/
     - wtk_kazakhstan_11km_2015.h5
     - wtk_kazakhstan_4km_2015.h5
-  - mexico/ # hourly resolution
-    - wtk_mexico_2007.h5
+  - led/
+    - conus-hr/
+      - conus_2017.h5
+      - conus_2018.h5
+  - maine/
+    - North_Atlantic_2000-01.h5
     - ...
-    - wtk_mexico_2014.h5
+    - North_Atlantic_2000-12.h5
+    - ...
+    - North_Atlantic_2020-01.h5
+    - ...
+    - North_Atlantic_2020-12.h5
+    - North_Atlantic_2000.h5
+    - ...
+    - North_Atlantic_2020.h5
+      - yearly_hr/
+        - North_Atlantic_2000_hr.h5
+        - ...
+        - North_Atlantic_2020_hr.h5
   - mexico-5min/ # 5min resolution
     - wtk_mexico_2007.h5
     - ...
     - wtk_mexico_2014.h5
-  - mid_atlantic/ # hourly resolution
-    - Mid_Atlantic_2000.h5
+  - mexico/ # hourly resolution
+    - wtk_mexico_2007.h5
     - ...
-    - Mid_Atlantic_2020.h5
+    - wtk_mexico_2014.h5
   - mid_atlantic-5min/ # 5min resolution
     - Mid_Atlantic_2000.h5
     - ...
     - Mid_Atlantic_2020.h5
-  - nw_pacific/ # hourly resolution
-    - NW_Pacific_2000.h5
+  - mid_atlantic/ # hourly resolution
+    - Mid_Atlantic_2000.h5
     - ...
-    - NW_Pacific_2019.h5
+    - Mid_Atlantic_2020.h5
+  - north_america/
+    - v1.0.0/
+      - north_america_2001.h5
+      - ...
+      - north_america_2020.h5
+  - now23_california/
+    - v1.0.0/
+      - 5min/
+        - now23_ca_5min_2000.h5
+        - ...
+        - now23_ca_5min_2022.h5
+      - 60min/
+        - now23_ca_60min_2000.h5
+        - ...
+        - now23_ca_60min_2022.h5
   - nw_pacific-5min/ # 5min resolution
     - NW_Pacific_2000.h5
     - ...
     - NW_Pacific_2019.h5
-  - offshore_ca/ # hourly resolution
+  - nw_pacific/ # hourly resolution
+    - NW_Pacific_2000.h5
+    - ...
+    - NW_Pacific_2019.h5
+  - offshore_ca-5min/ # 5min resolution
     - Offshore_CA_2000.h5
     - ...
     - Offshore_CA_2019.h5
-  - offshore_ca-5min/ # 5min resolution
+  - offshore_ca/ # hourly resolution
     - Offshore_CA_2000.h5
     - ...
     - Offshore_CA_2019.h5
   - philippines/
     - wtk_philippines_2017.h5
+  - pr100/
+    - 5min/
+      - puerto_rico_wind_5min_2001.h5
+      - ...
+      - puerto_rico_wind_5min_2020.h5
+    - hourly/
+      - puerto_rico_wind_hourly_2001.h5
+      - ...
+      - puerto_rico_wind_hourly_2020.h5
+  - seasiawind/
+    - seasiawind_2017.h5
+    - ...
+    - seasiawind_2021.h5
+  - seasiawind_v2/
+    - seasiawind_2007_v2.h5
+    - ...
+    - seasiawind_2021_v2.h5
+  - seasiawind_v3/
+    - seasiawind_2007_v3.h5
+    - ...
+    - seasiawind_2021_v3.h5
+  - south_atlantic/
+    - monthly/
+      - v1.0.0/
+        - satlantic_2000-01.h5
+        - ...
+        - satlantic_2000-12.h5
+        - ...
+        - satlantic_2020-01.h5
+        - ...
+        - satlantic_2020-12.h5
+    - yearly_5min/
+      - v1.0.0/
+        - satlantic_2000_hr.h5
+        - ...
+        - satlantic_2020_hr.h5
+    - yearly_hr/
+      - v1.0.0/
+        - satlantic_2000_hr.h5
+        - ...
+        - satlantic_2020_hr.h5
+  - sup3rwind/
+    - ukraine/
+      - 5min/
+        - sup3rwind_ukraine_2000.h5
+        - ...
+        - sup3rwind_ukraine_2023.h5
+      - 60min/
+        - sup3rwind_ukraine_2000.h5
+        - ...
+        - sup3rwind_ukraine_2023.h5
   - vietnam/
     - wtk_vietnam_2016.h5
     - ...

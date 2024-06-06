@@ -1,6 +1,6 @@
 # NREL Highly Scalable Data Service (HSDS) Examples
 
-NREL's HSDS service provides public access to several of DOEs high-value datasets available internally on the [Eagle HCP System](https://www.nrel.gov/hpc/eagle-datasets.html). Due to the high demand for the HSDS service, **users with access to NREL’s HPC should pursue direct access through that system.**
+NREL's HSDS service provides public access to several of DOEs high-value datasets available internally on the [Kestrel HCP System](https://www.nrel.gov/hpc/kestrel-computing-system.html). Due to the high demand for the HSDS service, **users with access to NREL’s HPC should pursue direct access through that system.**
 
 This repository provides examples and convenience functions for accessing the below datasets using HSDS:
 - [Wind Integration National Dataset (WIND) Toolkit](https://www.nrel.gov/grid/wind-toolkit.html)
@@ -95,7 +95,7 @@ A few miscellaneous tips:
 
 ## Credit
 
-This software is currently developed and maintained by Michael Rossol (michael.rossol@nrel.gov). This software was initially developed by Caleb Phillips (caleb.phillips@nrel.gov), John Readey (jreadey@hdfgroup.org), and Jordan Perr-Sauer (Jordan.Perr-Sauer@nrel.gov) to support the NREL Research Data Initiative and WIND Toolkit at the National Rewnable Energy Laboratory in Golden, Colorado, USA.
+This software is currently maintained by Reid Olson (reid.olson@nrel.gov). This software was initially developed by Caleb Phillips (caleb.phillips@nrel.gov), John Readey (jreadey@hdfgroup.org), Jordan Perr-Sauer (Jordan.Perr-Sauer@nrel.gov), and Michael Rossol to support the NREL Research Data Initiative and WIND Toolkit at the National Rewnable Energy Laboratory in Golden, Colorado, USA.
 
 ## License
 

@@ -4,11 +4,21 @@
   - conus/
     - nsrdb_conus_2018.h5
     - ...
-    - nsrdb_conus_20202.h5
+    - nsrdb_conus_2022.h5
+  - current/
+    - nsrdb_1998.h5
+    - ...
+    - nsrdb_2022.h5
+    -nsrdb_tdy-2021.h5
+    -nsrdb_tdy-2022.h5
+    -nsrdb_tgy-2021.h5
+    -nsrdb_tgy-2022.h5
+    -nsrdb_tmy-2021.h5
+    -nsrdb_tmy-2022.h5
   - full_disc/
     - nsrdb_full_disc_2018.h5
     - ...
-    - nsrdb_full_disc_2020.h5
+    - nsrdb_full_disc_2022.h5
   - india/
     - india_spectral_tmy.h5
     - nsrdb_india_2000.h5
@@ -22,9 +32,21 @@
     - himawari8_2015.h5
     - ...
     - himawari8_2020.h5
+    - himawari_tdy-2020.h5
+    - himawari_tgy-2020.h5
+    - himawari_tmy-2020.h5
+    - himawari7/
+      - himawari7_2011.h5
+      - ...
+      - himawari7_2020.h5
+    - himawari8/
+      - himawari8_2015.h5
+      - ...
+      - himawari8_2020.h5
   - meteosat/
     - meteosat_2017.h5
     - meteosat_2018.h5
+    - meteosat_2019.h5
   - philippines/
     - philippines_2017.h5
   - puerto_rico/
