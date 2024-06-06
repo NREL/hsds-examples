@@ -1,6 +1,10 @@
 # DOE Water Power Technology Office's (WPTO) US Wave dataset
 
 - /nrel/US_wave/
+  - Alaska/
+    - Alaska_wave_1979.h5
+    - ...
+    - Alaska_wave_2010.h5
   - Atlantic/
     - Atlantic_wave_1979.h5
     - ...
@@ -13,7 +17,16 @@
     - West_Coast_wave_1979.h5
     - ...
     - West_Coast_wave_2010.h5
+  - maine/
+    - North_Atlantic_2000-01.h5
+    - ...
+    - North_Atlantic_2000-12.h5
+    - North_Atlantic_2001-01.h5
+    - ...
+    - North_Atlantic_2001-12.h5
   - virtual_buoy/
+    - Alaska/
+    - Hawaii/
     - West_Coast/
       - West_Coast_virtual_buoy_1979.h5
       - ...
