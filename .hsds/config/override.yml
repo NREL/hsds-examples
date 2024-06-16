@@ -1,0 +1,9 @@
+log_level: ERROR 
+bucket_name: hsdstest
+server_name: "HSDS for Github codespaces"
+aws_region: us-west-2 # (original was us-east-1)
+aws_s3_gateway: http://s3.us-west-2.amazonaws.com/ # (original was null)
+aws_s3_no_sign_request: True # (original was false)
+root_dir: /data
+
+
