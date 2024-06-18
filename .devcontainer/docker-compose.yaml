@@ -4,9 +4,8 @@ services:
     image: "mcr.microsoft.com/devcontainers/universal:2"
     environment:
       - HS_ENDPOINT=http://localhost:5101
-      - HS_USERNAME=test_user1
-      - HS_PASSWORD=test
-      - H5PYD_TEST_FOLDER=/home/test_user1/h5pyd_test/
+      - HS_USERNAME=nrel_user
+      - HS_PASSWORD=tests
     volumes:
       - ..:/workspace:cached
 
