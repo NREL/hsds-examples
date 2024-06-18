@@ -47,6 +47,6 @@ for index in indices:
     t = time.time()
     arr = dset[:, index]
     elapsed = time.time() - t
-    print(f"dset[:, {index}] min: {arr.min():8.2f} max: {arr.max():8.2f} mean: {arr.mean():8.2f} (elapsed:8.2f) s")
+    print(f"dset[:, {index:8n}] min: {arr.min():8.2f} max: {arr.max():8.2f} mean: {arr.mean():8.2f} ({elapsed:.2f} s)")
 
 f.close()
