@@ -2,44 +2,40 @@ import h5pyd
 import h5py
 import random
 import sys
+import time
 
-def get_indices(extent, count, fixed=False):
-    indices = []
-    for i in range(count):
-        if fixed:
-            if i==0:
-                index = 0
-            else:
-                index = indices[i-1] + (extent // count)
-        else:
-            index = random.randint(0, extent-1)
-        indices.append(index)
+def get_indices(extent, count):
+    indices = set()
+    while len(indices) < count:
+        index = random.randint(0, extent-1)
+        indices.add(index)
+    indices = list(indices)
     indices.sort()
+    print("indices:", indices)
     return indices 
-    
 
 #
 # main
 #
 
 if len(sys.argv) == 1 or sys.argv[1] in ("-h", "--help"):
-    sys.exit(f"Usage:  {sys.argv[0]} [--fixed] <filepath>")
+    usage = f"Usage:  {sys.argv[0]} <filepath>\n"
+    usage += f"Example: python {sys.argv[0]} hdf5://nrel/nsrdb/conus/nsrdb_conus_2022.h5"
+    sys.exit(usage)
 
-if sys.argv[1] == "--fixed":
-    fixed = True
-    filepath = sys.argv[2]
-else: 
-    fixed = False
-    filepath = sys.argv[1]
+filepath = sys.argv[1]
 
-h5path =  "windspeed_80m"
+h5path =  "wind_speed"  # change if this dataset is not in the file
+bucket = "s3://nrel-pds-hsds"  # bucket for NREL HSDS data, ignored for posix file paths
 
 print(f"filepath: {filepath}")
 
 if filepath.startswith("hdf5://"):
-    f = h5pyd.File(filepath)
+    f = h5pyd.File(filepath, bucket=bucket)
 else:
     f = h5py.File(filepath)
+
+print(list(f))
 
 dset = f[h5path]
 print(f"{h5path}: {dset}")
@@ -48,11 +44,13 @@ print(f"compression: {dset.compression}")
 
 # read x-y slices 
 
-indices = get_indices(dset.shape[0], 10, fixed=fixed)
+indices = get_indices(dset.shape[1], 10)
 print(indices)
 
 for index in indices:
-    arr = dset[index, :, :]
-    print(f"dset[{index},:,:] min: {arr.min():.2f} max: {arr.max():.2f} mean: {arr.mean():.2f}")
+    t = time.time()
+    arr = dset[:, index]
+    elapsed = time.time() - t
+    print(f"dset[:, {index}] min: {arr.min():.2f} max: {arr.max():.2f} mean: {arr.mean():.2f} (elapsed:.2f) s")
 
 f.close()
