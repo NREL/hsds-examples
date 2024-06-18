@@ -11,7 +11,6 @@ def get_indices(extent, count):
         indices.add(index)
     indices = list(indices)
     indices.sort()
-    print("indices:", indices)
     return indices 
 
 #
@@ -28,8 +27,6 @@ filepath = sys.argv[1]
 h5path =  "wind_speed"  # change if this dataset is not in the file
 bucket = "s3://nrel-pds-hsds"  # bucket for NREL HSDS data, ignored for posix file paths
 
-print(f"filepath: {filepath}")
-
 if filepath.startswith("hdf5://"):
     f = h5pyd.File(filepath, bucket=bucket)
 else:
@@ -45,12 +42,11 @@ print(f"compression: {dset.compression}")
 # read x-y slices 
 
 indices = get_indices(dset.shape[1], 10)
-print(indices)
 
 for index in indices:
     t = time.time()
     arr = dset[:, index]
     elapsed = time.time() - t
-    print(f"dset[:, {index}] min: {arr.min():.2f} max: {arr.max():.2f} mean: {arr.mean():.2f} (elapsed:.2f) s")
+    print(f"dset[:, {index}] min: {arr.min():8.2f} max: {arr.max():8.2f} mean: {arr.mean():8.2f} (elapsed:8.2f) s")
 
 f.close()
