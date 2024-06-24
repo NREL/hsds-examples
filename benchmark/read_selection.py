@@ -41,9 +41,8 @@ if driver == "s3fs":
     f = h5py.File(s3.open("s3://nrel-pds-nsrdb/conus/nsrdb_conus_pv_2022.h5", "rb"), "r")
 else:
     hsds_domain = "hdf5://nrel/nsrdb/conus/nsrdb_conus_2022.h5"
-    hsds_bucket = "s3://nrel-pds-hsds"  # bucket for NREL HSDS data
-    print(f"opening HSDS domain: {hsds_domain} on bucket: {hsds_bucket}")
-    f = h5pyd.File(hsds_domain, bucket=hsds_bucket)
+    print(f"opening HSDS domain: {hsds_domain}")
+    f = h5pyd.File(hsds_domain)
 
 if h5path not in f:
     sys.exit(f"{h5path} dataset not found")
