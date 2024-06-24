@@ -5,7 +5,7 @@ services:
     environment:
       - HS_ENDPOINT=http://localhost:5101
       - HS_USERNAME=nrel_user
-      - HS_PASSWORD=tests
+      - HS_PASSWORD=test
     volumes:
       - ..:/workspace:cached
 
@@ -25,7 +25,6 @@ services:
     ports:
       - 5100
     volumes:
-      - ../.hsds/data:/data
       - ../.hsds/config/:/config/
   dn1:
     image: hdfgroup/hsds:master
@@ -33,13 +32,11 @@ services:
     mem_limit: 1g
     environment:
       - NODE_TYPE=dn
-      - ROOT_DIR=/data
     ports:
       - 6101
     depends_on:
       - head
     volumes:
-      - ../.hsds/data:/data
       - ../.hsds/config/:/config/
     links:
       - head
@@ -54,7 +51,6 @@ services:
     depends_on:
       - head
     volumes:
-      - ../.hsds/data:/data
       - ../.hsds/config/:/config/
     links:
       - head
@@ -69,7 +65,6 @@ services:
     depends_on:
       - head
     volumes:
-      - ../.hsds/data:/data
       - ../.hsds/config/:/config/
     links:
       - head
@@ -84,7 +79,6 @@ services:
     depends_on:
       - head
     volumes:
-      - ../.hsds/data:/data
       - ../.hsds/config/:/config/
     links:
       - head
@@ -100,7 +94,6 @@ services:
     depends_on:
       - head
     volumes:
-      - ../.hsds/data:/data
       - ../.hsds/config/:/config/
     links:
       - head

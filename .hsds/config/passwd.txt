@@ -11,4 +11,4 @@
 admin:admin
 test_user1:test
 test_user2:test
-nrel_user:tests
+nrel_user:test
