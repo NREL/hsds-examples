@@ -1,6 +1,5 @@
 import h5pyd
 import h5py
-import s3fs
 import random
 import sys
 import time
@@ -34,6 +33,11 @@ else:
     driver = "hsds"  # default to hsds
 
 if driver == "s3fs":
+
+    try:
+        import s3fs
+    except ImportError:
+        sys.exit("run 'pip install s3fs' to use the s3fs option")
     # s3fs enables h5py to "see" S3 files as read-only posix files
     s3_uri = "s3://nrel-pds-nsrdb/conus/nsrdb_conus_pv_2022.h5"
     s3 = s3fs.S3FileSystem(anon=True)
