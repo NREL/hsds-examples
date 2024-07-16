@@ -14,7 +14,7 @@ This repository provides examples and convenience functions for accessing the be
 - [Wind Integration National Dataset (WIND) Toolkit](https://www.nrel.gov/grid/wind-toolkit.html)
 - [National Solar Radiation Database (NSRDB)](https://nsrdb.nrel.gov/)
 
-T
+
 ## How to Use
 
 here are several options for using HSDS to access NREL datasets.  The most common approaches are:
@@ -48,6 +48,9 @@ Running this repository as codespace:
 6. Click the "Create Codespace" button
 
 It will take a few minutes until your codespace is ready to use.  Once ready, you can run any of the notebooks in this repository.
+
+When running the first cell in a notebook, you will be prompted to select a "kernel".  To do so, choose "Python Environments" and
+then "Python 3.10.13".
 
 Once your work is complete, you can delete the codespace, by going to http://github.com/codespaces, selecting our codespace, and clicking the "delete" button.
 
