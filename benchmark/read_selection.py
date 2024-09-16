@@ -15,6 +15,19 @@ def get_indices(extent, count):
     indices.sort()
     return indices 
 
+def get_page_buf_size(filename):
+    # if the filename has the format: [name]_pNm.h5 return N * 1024*1024,
+    # otherwise return None
+    page_buf_size = None
+    if filename.endswith("m.h5"):
+        n = filename.rfind("_p")
+        if n > 0:
+            s = filename[n+2:-4]
+            mb = int(s)
+            page_buf_size = mb * 1024 * 1024
+    return page_buf_size
+
+
 #
 # main
 #
@@ -49,6 +62,10 @@ if len(sys.argv) > 2:
 else:
     h5path =  "wind_speed"  # default
 
+page_buf_size = get_page_buf_size(filepath)
+if page_buf_size:
+    print(f"suing page_buf_size: {page_buf_size}")
+
 if driver == "s3fs":
 
     try:
@@ -60,10 +77,10 @@ if driver == "s3fs":
     # s3fs enables h5py to "see" S3 files as read-only posix files
     s3 = s3fs.S3FileSystem(anon=True)
     print(f"opening HDF5 file at: {filepath} with s3fs")
-    f = h5py.File(s3.open(filepath, "rb"), "r")
+    f = h5py.File(s3.open(filepath, "rb"), page_buf_size=page_buf_size)
 elif driver == "ros3":
     print(f"opening HDF5 file at: {filepath} with ros3")
-    f = h5py.File(filepath, driver="ros3")
+    f = h5py.File(filepath, driver="ros3", page_buf_size=page_buf_size)
 elif driver == "hsds":
     print(f"opening HSDS domain: {filepath}")
     if "BUCKET_NAME" in os.environ:
@@ -73,7 +90,7 @@ elif driver == "hsds":
     f = h5pyd.File(filepath, bucket=bucket)
 else:
     print(f"opening HDF5 file at: {filepath} with hdf5 lib")
-    f = h5py.File(filepath)
+    f = h5py.File(filepath, page_buf_size=page_buf_size)
 
 
 if h5path not in f:
