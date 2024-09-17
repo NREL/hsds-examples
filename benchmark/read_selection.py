@@ -5,6 +5,7 @@ import random
 import sys
 import time
 
+mb = 1024*1024
 
 def get_indices(extent, count):
     indices = set()
@@ -15,24 +16,23 @@ def get_indices(extent, count):
     indices.sort()
     return indices 
 
-def get_page_buf_size(filename):
-    # if the filename has the format: [name]_pNm.h5 return N * 1024*1024,
+def get_page_size(filename):
+    # if the filename has the format: [name]_pNm.h5 return N,
     # otherwise return None
-    page_buf_size = None
+    page_size = None
     if filename.endswith("m.h5"):
         n = filename.rfind("_p")
         if n > 0:
             s = filename[n+2:-4]
-            mb = int(s)
-            page_buf_size = mb * 1024 * 1024
-    return page_buf_size
+            page_size = int(s)
+    return page_size
 
 
 #
 # main
 #
 
-usage = f"Usage:  {sys.argv[0]} [filepath] [h5path]"
+usage = f"Usage:  {sys.argv[0]} [filepath] [h5path] [page_buf_size_mb]"
 
 if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help"):
     print(usage)
@@ -62,9 +62,21 @@ if len(sys.argv) > 2:
 else:
     h5path =  "wind_speed"  # default
 
-page_buf_size = get_page_buf_size(filepath)
-if page_buf_size:
-    print(f"suing page_buf_size: {page_buf_size}")
+if len(sys.argv) > 3:
+    page_buf_size = int(sys.argv[3])
+    print(f"page_buf_size: {page_buf_size} mb")
+else:
+    page_buf_size = None
+
+page_size = get_page_size(filepath)
+if page_size:
+    print(f"page_size: {page_size} mb")
+    if page_buf_size:
+        if page_buf_size < page_size:
+            sys.exit("page_buf_size must be >= page_size")
+    else:
+        page_buf_size = page_size
+    page_buf_size *= mb  # convert to bytes
 
 if driver == "s3fs":
 
