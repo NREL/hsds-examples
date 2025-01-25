@@ -4,7 +4,7 @@
 # NREL Highly Scalable Data Service (HSDS) Examples
 
 NREL has many several of DOE's high-value datasets publicly available on AWS's Simple Storage Service (S3).  While users are free to
-download or directly read these files, their large sizes (typically 10's of TBs per file) can make this impractable.  To provide an 
+download or directly read these files, their large sizes (typically 10's of TBs per file) can make this impractical.  To provide an 
 efficient way to access large HDF5 files in the cloud, The HDF Group (https://www.hdfgroup.org) has developed a REST-based data service 
 known as HSDS (Highly Scalable Data Service).  HSDS provides high performance access to these files via the use of parallel processing to 
 obtain the highest bandwidth possible from S3.  You can read more about the HSDS service here: https://www.hdfgroup.org/solutions/highly-scalable-data-service-hsds/.  
@@ -17,13 +17,14 @@ This repository provides examples and convenience functions for accessing the be
 
 ## How to Use
 
-here are several options for using HSDS to access NREL datasets.  The most common approaches are:
+There are several options for using HSDS to access NREL datasets.  The most common approaches are:
 
 1. Use GitHub Codespaces
 2. Access the NREL developer API
-3. Setup a local HSDS server on EC2 (AWS)
+3. Setup a local HSDS Server
+4. Setup a local HSDS Server on EC2 (AWS)
 
-Options 1 or 2 are the two easiest ways to get started.  Option 3 requires an AWS account and will incur AWS charges for every hour the
+Options 1 or 2 are the two easiest ways to get started.  Option 4 requires an AWS account and will incur AWS charges for every hour the
 EC2 instance is running, but this option may be best suited for users planning long-running, heavy access to NREL datasets.
 
 Setup instructions for each appoach follow.
@@ -91,6 +92,9 @@ Finally, you can use Jupyter Notebook to view the example notebooks:
 cd notebooks
 jupyter notebook
 ```
+
+## Setup a Local HSDS Server 
+Setting up an HSDS server on your local machine can be done by following [these instructions](https://nrel.github.io/rex/misc/examples.hsds.html#setting-up-a-local-hsds-server) from the rex documentation.
 
 
 ## Running a Local HSDS Server on EC2 (AWS)
