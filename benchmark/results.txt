@@ -1,0 +1,150 @@
+$ docker run --rm -v /data:/data -v /home/ec2-user/hsds-examples/benchmark:/benchmark -t hdfgroup/hdf5lib:1.14.4 python /benchmark/read_selection.py /data/nsrdb_2020.h5 wind_speed
+opening HDF5 file at: /data/nsrdb_2020.h5 with hdf5 lib
+wind_speed: <HDF5 dataset "wind_speed": shape (17568, 2018392), type "<u2">
+chunks: (2688, 372)
+compression: None
+dset[:,   390500] min:     0.00 max:    20.00 mean:     5.86 (0.10 s)
+dset[:,   425567] min:     0.00 max:    20.00 mean:     3.33 (0.09 s)
+dset[:,   440598] min:     0.00 max:    24.00 mean:     4.47 (0.10 s)
+dset[:,   566187] min:     1.00 max:    70.00 mean:    17.49 (0.10 s)
+dset[:,  1116094] min:     1.00 max:    51.00 mean:    16.03 (0.10 s)
+dset[:,  1161378] min:     1.00 max:   173.00 mean:    44.52 (0.09 s)
+dset[:,  1387219] min:     1.00 max:    58.00 mean:    18.93 (0.09 s)
+dset[:,  1457715] min:     1.00 max:    90.00 mean:    24.64 (0.10 s)
+dset[:,  1536592] min:     3.00 max:   152.00 mean:    46.37 (0.09 s)
+dset[:,  1654158] min:     1.00 max:    60.00 mean:    22.82 (0.09 s)
+avg time: 0.09 s
+
+$ docker run --rm -v /data:/data -v /home/ec2-user/hsds-examples/benchmark:/benchmark -t hdfgroup/hdf5lib:1.14.4 python /benchmark/read_selection.py /data/nsrdb_2020_p2m.h5 wind_speed 2
+page_buf_size: 2 mb
+page_size: 2 mb
+opening HDF5 file at: /data/nsrdb_2020_p2m.h5 with hdf5 lib
+wind_speed: <HDF5 dataset "wind_speed": shape (17568, 2018392), type "<u2">
+chunks: (2688, 372)
+compression: None
+dset[:,    34283] min:     1.00 max:    49.00 mean:    14.55 (0.07 s)
+dset[:,   302115] min:     0.00 max:    16.00 mean:     3.35 (0.06 s)
+dset[:,   314893] min:     1.00 max:   116.00 mean:    33.71 (0.06 s)
+dset[:,  1005115] min:     0.00 max:    13.00 mean:     1.58 (0.06 s)
+dset[:,  1164086] min:     1.00 max:    19.00 mean:     5.31 (0.07 s)
+dset[:,  1315072] min:     0.00 max:   144.00 mean:    41.91 (0.06 s)
+dset[:,  1553391] min:     0.00 max:    21.00 mean:     5.57 (0.06 s)
+dset[:,  1592028] min:     0.00 max:     9.00 mean:     0.66 (0.07 s)
+dset[:,  1788744] min:     0.00 max:     6.00 mean:     0.50 (0.07 s)
+dset[:,  1862369] min:     0.00 max:    38.00 mean:     9.73 (0.06 s)
+avg time: 0.06 s
+
+
+$ docker run --rm -v /home/ec2-user/hsds-examples/benchmark:/benchmark -v /home/ec2-user/.hscfg:/root/.hscfg -e BUCKET_NAME=nrel-pds-hsds -t hdfgroup/hdf5lib:1.14.4 python /benchmark/read_selection.py hdf5://nrel/nsrdb/v3/nsrdb_2020.h5  wind_speed
+opening HSDS domain: hdf5://nrel/nsrdb/v3/nsrdb_2020.h5
+wind_speed: <HDF5 dataset "wind_speed": shape (17568, 2018392), type "<u2">
+chunks: (2688, 372)
+compression: None
+links to: s3://nrel-pds-nsrdb/v3/nsrdb_2020.h5
+dset[:,    11881] min:     5.00 max:    90.00 mean:    58.08 (0.70 s)
+dset[:,   207440] min:     1.00 max:    37.00 mean:     9.62 (0.56 s)
+dset[:,   282982] min:     2.00 max:   127.00 mean:    38.97 (0.51 s)
+dset[:,   337526] min:     0.00 max:    30.00 mean:     8.75 (0.57 s)
+dset[:,   383100] min:     0.00 max:    22.00 mean:     5.94 (0.42 s)
+dset[:,   440290] min:     0.00 max:    24.00 mean:     3.14 (0.40 s)
+dset[:,   674262] min:     2.00 max:   108.00 mean:    37.58 (0.39 s)
+dset[:,   897595] min:     3.00 max:    85.00 mean:    23.70 (0.41 s)
+dset[:,  1279980] min:     2.00 max:   136.00 mean:    35.70 (0.40 s)
+dset[:,  1525056] min:     0.00 max:     9.00 mean:     2.62 (0.58 s)
+avg time: 0.49 s
+
+
+$ docker run --rm -v /data:/data -v /home/ec2-user/hsds-examples/benchmark:/benchmark -t hdfgroup/hdf5lib:1.14.4 python /benchmark/read_selection.py s3://hdf5.sample/data/NREL/nsrdb_2020.h5 wind_speed
+opening HDF5 file at: s3://hdf5.sample/data/NREL/nsrdb_2020.h5 with s3fs
+wind_speed: <HDF5 dataset "wind_speed": shape (17568, 2018392), type "<u2">
+chunks: (2688, 372)
+compression: None
+dset[:,   355578] min:     2.00 max:   196.00 mean:    51.52 (4.34 s)
+dset[:,   543335] min:     4.00 max:   121.00 mean:    33.77 (4.49 s)
+dset[:,   623756] min:     1.00 max:    22.00 mean:     6.18 (3.58 s)
+dset[:,   663761] min:     1.00 max:   164.00 mean:    47.36 (2.74 s)
+dset[:,   712406] min:     1.00 max:    95.00 mean:    28.53 (2.52 s)
+dset[:,   844512] min:     0.00 max:    11.00 mean:     2.00 (2.21 s)
+dset[:,   861570] min:     0.00 max:    19.00 mean:     5.50 (3.37 s)
+dset[:,  1247405] min:     0.00 max:    23.00 mean:     3.10 (5.33 s)
+dset[:,  1579490] min:     0.00 max:     7.00 mean:     0.66 (3.71 s)
+dset[:,  1764230] min:     2.00 max:   107.00 mean:    34.74 (3.08 s)
+avg time: 3.54 s
+$ docker run --rm -v /home/ec2-user/hsds-examples/benchmark:/benchmark -t hdfgroup/hdf5lib:1.14.4 python /benchmark/read_selection.py s3://hdf5.sample/data/NREL/nsrdb_2020_p2m.h5 wind_speed 2
+page_buf_size: 2 mb
+page_size: 2 mb
+opening HDF5 file at: s3://hdf5.sample/data/NREL/nsrdb_2020_p2m.h5 with s3fs
+wind_speed: <HDF5 dataset "wind_speed": shape (17568, 2018392), type "<u2">
+chunks: (2688, 372)
+compression: None
+dset[:,   265443] min:     0.00 max:    15.00 mean:     3.85 (2.66 s)
+dset[:,   268346] min:     1.00 max:   126.00 mean:    37.15 (1.61 s)
+dset[:,   663331] min:     1.00 max:   116.00 mean:    37.27 (2.15 s)
+dset[:,   769828] min:     1.00 max:   100.00 mean:    28.19 (2.57 s)
+dset[:,  1030129] min:     1.00 max:    68.00 mean:    24.29 (2.28 s)
+dset[:,  1121682] min:     0.00 max:    20.00 mean:     4.81 (2.08 s)
+dset[:,  1635351] min:     0.00 max:    13.00 mean:     6.56 (2.45 s)
+dset[:,  1796265] min:     0.00 max:     9.00 mean:     1.09 (2.87 s)
+dset[:,  1874698] min:     2.00 max:    83.00 mean:    21.72 (2.44 s)
+dset[:,  1928255] min:     1.00 max:    65.00 mean:    21.04 (2.47 s)
+avg time: 2.36 s
+
+$ docker run --rm -v /home/ec2-user/hsds-examples/benchmark:/benchmark -t hdfgroup/hdf5lib:1.14.4 python /benchmark/read_selection.py s3://hdf5.sample/data/NREL/nsrdb_2020_p2m.h5 wind_speed 4
+page_buf_size: 4 mb
+page_size: 2 mb
+opening HDF5 file at: s3://hdf5.sample/data/NREL/nsrdb_2020_p2m.h5 with s3fs
+wind_speed: <HDF5 dataset "wind_speed": shape (17568, 2018392), type "<u2">
+chunks: (2688, 372)
+compression: None
+dset[:,    25889] min:     0.00 max:   119.00 mean:    29.03 (2.52 s)
+dset[:,    94782] min:     1.00 max:    94.00 mean:    28.02 (1.96 s)
+dset[:,   504024] min:     2.00 max:   110.00 mean:    33.05 (2.00 s)
+dset[:,   611498] min:     1.00 max:    89.00 mean:    27.64 (2.47 s)
+dset[:,   636536] min:     0.00 max:    68.00 mean:    21.73 (1.72 s)
+dset[:,   699075] min:     0.00 max:    42.00 mean:    14.78 (2.25 s)
+dset[:,  1176375] min:     0.00 max:    35.00 mean:    14.18 (1.97 s)
+dset[:,  1202756] min:     0.00 max:    33.00 mean:     4.68 (1.82 s)
+dset[:,  1355434] min:     0.00 max:    11.00 mean:     4.02 (2.14 s)
+dset[:,  1588393] min:     1.00 max:    38.00 mean:     9.90 (2.38 s)
+avg time: 2.12 s
+
+$ docker run --rm -v /home/ec2-user/hsds-examples/benchmark:/benchmark -t hdfgroup/hdf5lib:1.14.4 python /benchmark/read_selection.py s3://hdf5.sample/data/NREL/nsrdb_2020_p2m.h5 wind_speed 8
+page_buf_size: 8 mb
+page_size: 2 mb
+opening HDF5 file at: s3://hdf5.sample/data/NREL/nsrdb_2020_p2m.h5 with s3fs
+wind_speed: <HDF5 dataset "wind_speed": shape (17568, 2018392), type "<u2">
+chunks: (2688, 372)
+compression: None
+dset[:,    24402] min:     0.00 max:    12.00 mean:     3.71 (1.59 s)
+dset[:,   203319] min:     2.00 max:    83.00 mean:    19.12 (2.30 s)
+dset[:,   503040] min:     0.00 max:   132.00 mean:    36.14 (1.64 s)
+dset[:,   602327] min:     1.00 max:    53.00 mean:    14.02 (2.31 s)
+dset[:,   942391] min:     1.00 max:    79.00 mean:    24.37 (1.78 s)
+dset[:,   943043] min:     0.00 max:    12.00 mean:     1.51 (1.48 s)
+dset[:,  1228299] min:     2.00 max:   119.00 mean:    37.76 (1.78 s)
+dset[:,  1336902] min:     0.00 max:    20.00 mean:     3.31 (1.44 s)
+dset[:,  1474634] min:     1.00 max:   131.00 mean:    27.27 (2.21 s)
+dset[:,  1833278] min:     0.00 max:     7.00 mean:     1.48 (2.63 s)
+avg time: 1.92 s
+
+$ docker run --rm -v /home/ec2-user/hsds-examples/benchmark:/benchmark -t hdfgroup/hdf5lib:1.14.4 python /benchmark/read_selection.py s3://hdf5.sample/data/NREL/nsrdb_2020_p2m.h5 wind_speed 16
+page_buf_size: 16 mb
+page_size: 2 mb
+opening HDF5 file at: s3://hdf5.sample/data/NREL/nsrdb_2020_p2m.h5 with s3fs
+wind_speed: <HDF5 dataset "wind_speed": shape (17568, 2018392), type "<u2">
+chunks: (2688, 372)
+compression: None
+dset[:,   237824] min:     0.00 max:    12.00 mean:     3.54 (1.78 s)
+dset[:,   300269] min:     1.00 max:   129.00 mean:    36.53 (1.52 s)
+dset[:,   587059] min:     1.00 max:    98.00 mean:    37.04 (2.29 s)
+dset[:,   663852] min:     1.00 max:   105.00 mean:    32.10 (2.27 s)
+dset[:,   954870] min:     2.00 max:   108.00 mean:    31.16 (1.62 s)
+dset[:,  1392460] min:     0.00 max:     7.00 mean:     0.83 (2.34 s)
+dset[:,  1443504] min:     2.00 max:    72.00 mean:    29.42 (2.07 s)
+dset[:,  1469200] min:     0.00 max:    20.00 mean:     5.05 (1.70 s)
+dset[:,  1669532] min:     0.00 max:     9.00 mean:     0.79 (1.71 s)
+dset[:,  1973050] min:     1.00 max:    33.00 mean:    12.09 (2.01 s)
+avg time: 1.93 s
+
+
+
