@@ -73,7 +73,14 @@ def NSRDB_idx(nsrdb, lat_lon):
         x/y coordinate in the database of the closest pixel to coordinate of
         interest
     """
-    dset_coords = nsrdb['coordinates'][...]
+    # Prefer an explicit 'coordinates' dataset; fall back to coordinates stored in 'meta'
+    try:
+        dset_coords = nsrdb['coordinates'][...]
+    except Exception:
+        meta = pd.DataFrame(nsrdb['meta'][...])
+        # ensure we have an (N,2) numpy array of lat/lon
+        dset_coords = meta[['latitude', 'longitude']].values
+
     tree = cKDTree(dset_coords)
     _, pos = tree.query(np.array(lat_lon))
     return pos
@@ -104,6 +111,7 @@ class HSDS:
     """
     HSDS Resource handler class
     """
+
     def __init__(self, hsds_path, preload=False):
         """
         Parameters
