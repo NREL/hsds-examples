@@ -73,7 +73,8 @@ def NSRDB_idx(nsrdb, lat_lon):
         x/y coordinate in the database of the closest pixel to coordinate of
         interest
     """
-    # Prefer an explicit 'coordinates' dataset; fall back to coordinates stored in 'meta'
+    # Prefer an explicit 'coordinates' dataset; fall back to coordinates
+    # stored in 'meta'
     try:
         dset_coords = nsrdb['coordinates'][...]
     except Exception:
@@ -136,7 +137,9 @@ class HSDS:
         """
         if self._time_index is None:
             time_index = self._h5d['time_index'][...].astype(str)
-            self._time_index = pd.to_datetime(time_index)
+            # Parse as UTC-aware timestamps to avoid tz-naive vs tz-aware
+            # arithmetic errors when comparing or subtracting datetimes.
+            self._time_index = pd.to_datetime(time_index, utc=True)
 
         return self._time_index
 
@@ -162,7 +165,13 @@ class HSDS:
             KDTree on site coordinates (latitude, longitude)
         """
         if self._tree is None:
-            site_coords = self._h5d['coordinates'][...]
+            # Prefer explicit coordinates dataset; fall back to meta lat/lon
+            try:
+                site_coords = self._h5d['coordinates'][...]
+            except Exception:
+                meta = pd.DataFrame(self._h5d['meta'][...])
+                site_coords = meta[['latitude', 'longitude']].values
+
             self._tree = cKDTree(site_coords)
 
         return self._tree
@@ -172,9 +181,15 @@ class HSDS:
         Preload time_index, meta, and tree
         """
         time_index = self._h5d['time_index'][...].astype(str)
-        self._time_index = pd.to_datetime(time_index)
+        # Store UTC-aware timestamps
+        self._time_index = pd.to_datetime(time_index, utc=True)
+        # Prefer explicit coordinates dataset; fall back to meta lat/lon
+        try:
+            site_coords = self._h5d['coordinates'][...]
+        except Exception:
+            meta = pd.DataFrame(self._h5d['meta'][...])
+            site_coords = meta[['latitude', 'longitude']].values
 
-        site_coords = self._h5d['coordinates'][...]
         self._tree = cKDTree(site_coords)
 
         self._meta = pd.DataFrame(self._h5d['meta'][...])
@@ -211,7 +226,18 @@ class HSDS:
         time_idx : int
             Time index in the datasets
         """
-        delta = np.abs(self.time_index - timestep)
+        # Ensure the incoming timestep has the same tz-awareness as the
+        # stored time_index. If the provided timestep is tz-naive, treat it
+        # as UTC and localize to UTC so arithmetic works consistently. If
+        # it's tz-aware, convert it to UTC to match the stored index.
+        if (not hasattr(timestep, 'tzinfo')
+                or getattr(timestep, 'tzinfo') is None):
+            # pd.to_datetime will produce a tz-naive Timestamp; localize to UTC
+            ts = pd.to_datetime(timestep, utc=True)
+        else:
+            ts = pd.to_datetime(timestep).tz_convert('UTC')
+
+        delta = np.abs(self.time_index - ts)
         time_idx = delta.argmin()
 
         return time_idx
